@@ -1,8 +1,29 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
+import {Header, Titulo, ContenedorBotones, ContenedorHeader} from './elements/Header'
+import Boton from './elements/Boton';
+
+
 
 const App = () => {
   return ( 
-    <h1>hola</h1>
+    <>
+      <Helmet>
+        <title>Agregar gastos</title>
+      </Helmet>
+
+    <Header>
+      <ContenedorHeader>
+        <Titulo>Agregar Gasto</Titulo>
+        <ContenedorBotones>
+          <Boton to='/categorias' >Categorias</Boton>
+          <Boton to='/lista' >Lista de gastos</Boton>
+          <Boton>x</Boton>
+        </ContenedorBotones>
+      </ContenedorHeader>
+    </Header>
+
+    </>
   );
 }
 
