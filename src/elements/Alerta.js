@@ -31,9 +31,7 @@ const ContenedorAlerta = styled.div`
     justify-content: center;
     align-items: center;
     animation: ${slideDown} 4s ease forwards;
-
     p {
-
         background: ${(props) => {
             if(props.tipo === 'error'){
                 return theme.rojo;
