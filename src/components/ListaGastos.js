@@ -4,6 +4,7 @@ import { Header, Titulo } from './../elements/Header'
 import BtnRegresar from "../elements/Regresar";
 
 const ListaGastos = () => {
+    
     return ( 
         <>
             <Helmet>
