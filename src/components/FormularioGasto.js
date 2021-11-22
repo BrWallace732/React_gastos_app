@@ -8,6 +8,8 @@ import SelectCat from './Select';
 import fromUnixTime from 'date-fns/fromUnixTime';
 import getUnixTime from 'date-fns/getUnixTime';
 import { useAuth } from './../context/AuthContext'
+import Alerta from './../elements/Alerta'
+
 const FormularioGasto = () => {
 
     const [inputDesc, setInputDesc] = useState('')
@@ -15,6 +17,8 @@ const FormularioGasto = () => {
     const [categoria, setCategoria] = useState('hogar')
     const [fecha, setFecha] = useState(new Date())
     const {usuario} = useAuth()
+    const [estadoAlerta, setEstadoAlerta] = useState(false)
+    const [alerta, setAlerta] = useState({})
 
     const handleChange = (e)=>{
         if(e.target.name === "descripcion"){
@@ -27,14 +31,38 @@ const FormularioGasto = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         let cantidad = parseFloat(inputCant).toFixed(2)
+
+        if(inputDesc !== '' && inputCant !== ''){
+
+            if(cantidad){
+                agregarGasto({
+                    categoria: categoria,
+                    descripcion: inputDesc,
+                    cantidad: cantidad,
+                    fecha: getUnixTime(fecha),
+                    uidUsuario: usuario.uid
+                })
+                .then(()=>{
+                    setCategoria('hogar')
+                    setInputDesc('')
+                    setInputCant('')
+                    setFecha(new Date())
+                    setEstadoAlerta(true)
+                    setAlerta({tipo: 'exito', mensaje: 'el gasto fue gregado correctamente!..' })    
+                })
+                .catch((error)=>{
+                    setEstadoAlerta(true)
+                    setAlerta({tipo: 'error', mensaje:'hubo un problema al intentar agregar tu gasto'})
+                })
+            } else {
+                setEstadoAlerta(true)
+                setAlerta({tipo: 'error', mensaje: 'El valor que ingresaste es incorrecto' })
+            }
+        }else{
+            setEstadoAlerta(true)
+            setAlerta({tipo: 'error', mensaje: 'Faltan datos...' })
+        }
         
-        agregarGasto({
-            categoria: categoria,
-            descripcion: inputDesc,
-            cantidad: cantidad,
-            fecha: getUnixTime(fecha),
-            uidUsuario: usuario.uid
-        })
 
         
     }
@@ -62,14 +90,18 @@ const FormularioGasto = () => {
                     value={inputCant}
                     onChange={handleChange}
                 />
+            </div>
                 <ContenedorBoton>
                     <Boton as="button" primario conIcono type="submit">
                         Agregar Gasto <IconoPlus />
                     </Boton>
                 </ContenedorBoton>
-            </div>
-
-
+                <Alerta 
+                    tipo={alerta.tipo}
+                    mensaje={alerta.mensaje}
+                    estadoAlerta={estadoAlerta}
+                    setEstadoAlerta={setEstadoAlerta}
+                />
         </Formulario>
     );
 }
