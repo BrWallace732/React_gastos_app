@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { Header, Titulo } from './../elements/Header'
 import BtnRegresar from "../elements/Regresar";
+import BarraTotalGastado from "./BarraTotal";
 
 const ListaGastos = () => {
     
@@ -16,6 +17,7 @@ const ListaGastos = () => {
                     <Titulo>Lista de Gastos</Titulo>
             </Header>
 
+            <BarraTotalGastado />
         </>
     );
 }
