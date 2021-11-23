@@ -5,7 +5,7 @@ import theme from '../theme'
 const ContenedorFiltros = styled.div`
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1.87rem; /* 30px */
+    margin-bottom: 1rem; /* 30px */
     @media(max-width: 60rem){ /* 950px */
         flex-direction: column;
         & > * {
@@ -23,7 +23,7 @@ const Formulario = styled.form`
     input {
         width: 100%;
         text-align: center;
-        padding: 2.5rem 0;
+        padding: 2rem 0;
         font-family: 'Work Sans', sans-serif;
         &::placeholder {
             color: rgba(0,0,0,.2);
@@ -34,24 +34,24 @@ const Formulario = styled.form`
     }
 `;
 const Input = styled.input`
-    font-size: 2.5rem; /* 40px */
+    font-size: 1.5rem; /* 40px */
     text-transform: uppercase;
     border: none;
     border-bottom: 2px solid ${theme.grisClaro};
     outline: none;
     @media(max-width: 60rem){ /* 950px */
-        font-size: 2.2rem; /* 24px */
+        font-size: 1.8rem; /* 24px */
     }
 `;
 
 const InputGrande = styled(Input)`
-    font-size: 4.37rem; /* 70px */
+    font-size: 2.5rem; /* 70px */
     font-weight: bold;
 `; 
 const ContenedorBoton = styled.div`
     display: flex;
     justify-content: center;
-    margin: 2.5rem 0;  /* 40px */
+    margin: .5rem 0;  /* 40px */
 `;
 
 
