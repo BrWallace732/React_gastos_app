@@ -28,8 +28,8 @@ const IconoCat = ({id}) => {
         case 'transporte':
                 return <IconoTransporte />
         default:
-            break;
-    }
+        break;
+        }
 }
 
 export default IconoCat;
