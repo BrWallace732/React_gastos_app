@@ -5,7 +5,7 @@ import {ContenedorFiltros, Formulario, Input, InputGrande, ContenedorBoton } fro
 import { ReactComponent as IconoPlus } from './../images/plus.svg';
 import DatePicker from './DatePicker';
 import SelectCat from './Select';
-import fromUnixTime from 'date-fns/fromUnixTime';
+//import fromUnixTime from 'date-fns/fromUnixTime';
 import getUnixTime from 'date-fns/getUnixTime';
 import { useAuth } from './../context/AuthContext'
 import Alerta from './../elements/Alerta'

@@ -7,8 +7,6 @@ import useObtenerGastos from "../hooks/UseObtenerGastos";
 import {
     Lista,
     ElementoLista,
-    ListaDeCategorias,
-    ElementoListaCategorias,
     Categoria,
     Descripcion,
     Valor,
@@ -30,7 +28,7 @@ import { format, fromUnixTime } from "date-fns";
 import { es } from "date-fns/locale";
 
 const ListaGastos = () => {
-    const [gastos] = useObtenerGastos()
+    const [gastos, obtenerMasGastos, porCargar] = useObtenerGastos()
     const fechaFromat = (fecha) => {
         return format(fromUnixTime(fecha), "dd 'de ' MMMM 'de ' yyyy", {locale: es})
     }
@@ -88,9 +86,11 @@ const ListaGastos = () => {
                     )
                 })}
 
-                <ContenedorBotonCentral>
-                    <BotonCargarMas>Cargar Mas...</BotonCargarMas>
-                </ContenedorBotonCentral>
+                {porCargar &&
+                    <ContenedorBotonCentral>
+                        <BotonCargarMas onClick={()=> obtenerMasGastos()}>Cargar Mas...</BotonCargarMas>
+                    </ContenedorBotonCentral>
+                }
 
                 {gastos.length === 0 && 
                     <ContenedorSubtitulo>
