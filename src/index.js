@@ -37,7 +37,7 @@ const Index = () => {
                 <RutaProtegida path="/lista" >
                   <ListaGastos />
                 </RutaProtegida>
-                <RutaProtegida path="/editar-gastos" >
+                <RutaProtegida path="/editar" >
                   <EditarGasto />
                 </RutaProtegida>
                 <RutaProtegida path="/" >
