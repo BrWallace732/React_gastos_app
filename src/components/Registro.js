@@ -6,6 +6,7 @@ import {Formulario, Input, ContenedorBoton } from "./../elements/ElementsForm"
 import { auth } from "../firebase/firebaseConfig";
 import { useHistory } from "react-router";
 import Alerta from "../elements/Alerta";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 
 const Registro = () => {
@@ -68,7 +69,7 @@ const Registro = () => {
             return
         }
         try {
-            await auth.createUserWithEmailAndPassword(correo, password)
+            await createUserWithEmailAndPassword(auth, correo, password)
             history.push('/')
         } catch (error) {
 

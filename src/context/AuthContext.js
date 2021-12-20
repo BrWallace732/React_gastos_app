@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useContext } from 'react/cjs/react.development'
 import { auth } from '../firebase/firebaseConfig'
+import { onAuthStateChanged } from "firebase/auth";
 
 const AuthContext = React.createContext()
 
@@ -14,7 +15,7 @@ const AuthProvider = ({children}) => {
     const [cargando, setCargando] = useState(true)
 
     useEffect(() => {
-        const cancelarSus = auth.onAuthStateChanged((usuario)=>{
+        const cancelarSus = onAuthStateChanged(auth, (usuario)=>{
             setUsuario(usuario)
             setCargando(false)
         })

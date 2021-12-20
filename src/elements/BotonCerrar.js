@@ -3,6 +3,7 @@ import { ReactComponent as IconoLogOut } from './../images/log-out.svg'
 import Boton from './Boton'
 import { auth } from '../firebase/firebaseConfig'
 import { useHistory } from 'react-router'
+import { signOut } from 'firebase/auth'
 
 
 const BotnoCerrarSesion = () => {
@@ -11,7 +12,7 @@ const BotnoCerrarSesion = () => {
 
     const cerrarSesion = async ()=> {
         try {
-            await auth.signOut()
+            await signOut(auth)
             history.push('/iniciar-sesion')
         } catch (error) {
             console.log(error)

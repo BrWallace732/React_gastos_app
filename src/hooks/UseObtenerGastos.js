@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import { db } from '../firebase/firebaseConfig'
 import { useAuth } from '../context/AuthContext'
+import {collection, onSnapshot, query, orderBy, where, limit, startAfter} from 'firebase/firestore'
 
 const useObtenerGastos = () => {
     const {usuario} = useAuth()
@@ -9,12 +10,14 @@ const useObtenerGastos = () => {
     const [porCargar, setPorCargar] = useState(false)
     
     const obtenerMasGastos = () =>{
-        db.collection('gastos')
-        .where('uidUsuario', '==', usuario.uid )
-        .orderBy('fecha', 'desc')
-        .limit(10)
-        .startAfter(ultimoGasto)
-        .onSnapshot((snapshot)=>{
+        const consulta = query(
+            collection(db, 'gastos'),
+            where('uidUsuario', '==', usuario.uid ),
+            orderBy('fecha', 'desc'),
+            limit(10),
+            startAfter(ultimoGasto)
+        )
+        onSnapshot(consulta, (snapshot)=>{
             if(snapshot.docs.length > 0){
                 setultimoGasto(snapshot.docs[snapshot.docs.length -1])
 
@@ -24,25 +27,28 @@ const useObtenerGastos = () => {
             } else {
                 setPorCargar(false)
             }
-        })
+        }, error => {console.log(error)})
     }
 
     useEffect(() => {
-        const unsuscribe = db.collection('gastos')
-        .where('uidUsuario', '==', usuario.uid )
-        .orderBy('fecha', 'desc')
-        .limit(10)
-        .onSnapshot((snapshot)=>{
-                if(snapshot.docs.length > 0){
-                    setultimoGasto(snapshot.docs[snapshot.docs.length -1])
-                    setPorCargar(true)
-                }else {
-                    setPorCargar(false)
-                }
+
+        const consulta = query(
+            collection(db, 'gastos'),
+            where('uidUsuario', '==', usuario.uid ),
+            orderBy('fecha', 'desc'),
+            limit(10)
+        )
+        const unsuscribe = onSnapshot(consulta, (snapshot)=>{
+            if(snapshot.docs.length > 0){
+                setultimoGasto(snapshot.docs[snapshot.docs.length -1])
+                setPorCargar(true)
+            }else {
+                setPorCargar(false)
+            }
             setGastos(snapshot.docs.map((gasto)=>{
                 return{...gasto.data(), id: gasto.id}
             }))
-        })
+        })  
         return unsuscribe
     }, [usuario])
 

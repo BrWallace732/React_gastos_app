@@ -6,6 +6,7 @@ import {Formulario, Input, ContenedorBoton } from "./../elements/ElementsForm"
 import { useHistory } from "react-router";
 import { auth } from "../firebase/firebaseConfig";
 import Alerta from "../elements/Alerta";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
 
@@ -49,7 +50,7 @@ const Login = () => {
         }
         
         try {
-            await auth.signInWithEmailAndPassword(correo, password)
+            await signInWithEmailAndPassword(auth, correo, password)
             history.push('/')
         } catch (error) {
             setEstadoAlerta(true)

@@ -1,7 +1,9 @@
 import {db} from './firebaseConfig'
+import { collection, addDoc } from 'firebase/firestore'
 
 const agregarGasto = ({categoria, descripcion, cantidad, fecha, uidUsuario}) => {
-    return db.collection('gastos').add({
+
+    return addDoc(collection(db, 'gastos'), {
         categoria: categoria,
         descripcion: descripcion,
         cantidad: Number(cantidad),

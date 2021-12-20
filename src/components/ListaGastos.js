@@ -68,7 +68,7 @@ const ListaGastos = () => {
                             <ElementoLista key={gasto.id}>
                                 <Categoria>
                                     <Iconos id={gasto.categoria} />
-                                    {gasto.descripcion}
+                                    {gasto.categoria}
                                 </Categoria>
                                 <Descripcion>
                                     {gasto.descripcion}
