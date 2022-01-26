@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Header, Titulo } from './../elements/Header'
-import BtnRegresar from "../elements/Regresar";
+import BtnRegresar from "../elements/BtnRegresar";
 import BarraTotalGastado from "./BarraTotal";
 import useObtenerGastos from "../hooks/UseObtenerGastos";
 import {

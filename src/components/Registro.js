@@ -4,14 +4,14 @@ import Boton from "../elements/Boton";
 import { ContenedorHeader, Header, Titulo } from "../elements/Header";
 import {Formulario, Input, ContenedorBoton } from "./../elements/ElementsForm"
 import { auth } from "../firebase/firebaseConfig";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Alerta from "../elements/Alerta";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 
 const Registro = () => {
 
-    const history = useHistory( )
+    const navigate = useNavigate( )
     const [correo, setCorreo] = useState('')
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
@@ -70,7 +70,7 @@ const Registro = () => {
         }
         try {
             await createUserWithEmailAndPassword(auth, correo, password)
-            history.push('/')
+            navigate('/')
         } catch (error) {
 
             setEstadoAlerta(true)

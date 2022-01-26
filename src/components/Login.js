@@ -3,14 +3,14 @@ import { Helmet } from "react-helmet";
 import Boton from "../elements/Boton";
 import { ContenedorHeader, Header, Titulo } from "../elements/Header";
 import {Formulario, Input, ContenedorBoton } from "./../elements/ElementsForm"
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase/firebaseConfig";
 import Alerta from "../elements/Alerta";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
 
-    const history = useHistory( )
+    const navigate = useNavigate( )
     const [correo, setCorreo] = useState('')
     const [password, setPassword] = useState('')
     const [estadoAlerta, setEstadoAlerta] = useState(false)
@@ -51,7 +51,7 @@ const Login = () => {
         
         try {
             await signInWithEmailAndPassword(auth, correo, password)
-            history.push('/')
+            navigate('/')
         } catch (error) {
             setEstadoAlerta(true)
             // console.log(error)

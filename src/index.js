@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import WebFont from 'webfontloader'
 import Contenedor from  './elements/Contenedor'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import EditarGasto from './components/EditarGasto'
 import GastosCategoria from './components/GastosCategoria'
 import ListaGastos from './components/ListaGastos'
@@ -13,9 +13,9 @@ import Registro from './components/Registro'
 import { Helmet } from 'react-helmet';
 import favicon from './images/icon.png'
 import { AuthProvider } from './context/AuthContext';
-import RutaProtegida from './components/RutaPrivada';
+// import RutaProtegida from './components/RutaPrivada';
 
-  WebFont.load({google: {families: ['Work Sans:400,500,700', 'sans-serif']}});
+  WebFont.load({google: {families: ['Work Sans:400,500,700', 'sans-serif']}}); 
 
 const Index = () => {
   return (
@@ -27,23 +27,14 @@ const Index = () => {
       <AuthProvider>
         <BrowserRouter>
           <Contenedor>
-              <Switch>
-                <Route path="/iniciar-sesion" component={Login} />
-                <Route path="/registro" component={Registro} />
-
-                <RutaProtegida path="/categorias" >
-                  <GastosCategoria />
-                </RutaProtegida>
-                <RutaProtegida path="/lista" >
-                  <ListaGastos />
-                </RutaProtegida>
-                <RutaProtegida path="/editar/:id" >
-                  <EditarGasto />
-                </RutaProtegida>
-                <RutaProtegida path="/" >
-                  <App />
-                </RutaProtegida>
-              </Switch>
+              <Routes>
+                <Route path="/iniciar-sesion" element={<Login/>} />
+                <Route path="/registro" element={<Registro/>} />
+                <Route path="/categorias" element={<GastosCategoria/>}/>
+                <Route path="/lista" element={<ListaGastos/>}/>
+                <Route path="/editar/:id" element={<EditarGasto/>}/>
+                <Route path="/" element={<App/>}/>
+              </Routes>
             </Contenedor>
         </BrowserRouter>
       </AuthProvider>

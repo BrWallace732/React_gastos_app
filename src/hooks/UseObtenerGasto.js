@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { db } from "../firebase/firebaseConfig";
-import {useHistory } from 'react-router-dom'
+import {useNavigate } from 'react-router-dom'
 import {doc, getDoc} from 'firebase/firestore'
 
 
 const UseObtenerGasto = (id) => {
-    const history = useHistory()
+    const navigate = useNavigate()
     const [gasto, setGasto] = useState('')
 
     useEffect(() => {
@@ -14,7 +14,7 @@ const UseObtenerGasto = (id) => {
             if(documento.exists){
                 setGasto(documento)
             }else{
-                history.push('/lista')
+                navigate('/lista')
             }
         }
         obtenerGasto()
@@ -28,7 +28,7 @@ const UseObtenerGasto = (id) => {
     //     }
     // })
 
-    }, [history, id])
+    }, [navigate, id])
 
     return [gasto]
 }

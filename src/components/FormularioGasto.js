@@ -9,7 +9,7 @@ import fromUnixTime from 'date-fns/fromUnixTime';
 import getUnixTime from 'date-fns/getUnixTime';
 import { useAuth } from './../context/AuthContext'
 import Alerta from './../elements/Alerta'
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import editarGasto from '../firebase/editarGasto';
 
 const FormularioGasto = ({gasto}) => {
@@ -22,7 +22,7 @@ const FormularioGasto = ({gasto}) => {
     const [alerta, setAlerta] = useState({})
     
     const {usuario} = useAuth()
-    const history = useHistory()
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -33,10 +33,10 @@ const FormularioGasto = ({gasto}) => {
                 setInputDesc(gasto.data().descripcion)
                 setInputCant(gasto.data().cantidad)
             } else {
-                history.push('/lista')
+                navigate('/lista')
             }
         }
-    }, [gasto, usuario, history])
+    }, [gasto, usuario, navigate])
     
 
     const handleChange = (e)=>{
@@ -50,7 +50,6 @@ const FormularioGasto = ({gasto}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         let cantidad = parseFloat(inputCant).toFixed(2)
-
         if(inputDesc !== '' && inputCant !== ''){
 
             if(cantidad){
@@ -62,7 +61,7 @@ const FormularioGasto = ({gasto}) => {
                         cantidad: cantidad,
                         fecha: getUnixTime(fecha)
                     }).then(()=>{
-                        history.push('/lista')
+                        navigate('/lista')
                     }).catch((error)=>{
                         console.log(error)
                     })
@@ -84,6 +83,7 @@ const FormularioGasto = ({gasto}) => {
                     })
                     .catch((error)=>{
                         setEstadoAlerta(true)
+                        console.log(error)
                         setAlerta({tipo: 'error', mensaje:'hubo un problema al intentar agregar tu gasto'})
                     })
                 }

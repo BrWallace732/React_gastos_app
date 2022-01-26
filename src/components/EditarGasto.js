@@ -1,7 +1,7 @@
 import React from "react";
 import { Header, Titulo } from './../elements/Header'
 import { Helmet } from "react-helmet";
-import BtnRegresar from "../elements/Regresar";
+import BtnRegresar from "../elements/BtnRegresar";
 import BarraTotalGastado from "./BarraTotal";
 import FormularioGasto from "./FormularioGasto";
 import { useParams } from "react-router-dom"; //"react-router-dom": "^5.1.2"
